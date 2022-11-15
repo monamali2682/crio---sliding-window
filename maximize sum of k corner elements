@@ -8,6 +8,9 @@ refer above link for explaination
 initially make left window of size k from beginning of array, then decrease left window by 1 unit and increase right window by 1 unit,
 do this till right window gets size k anf left window has size 0, for all these combinations maintain maxSum
 */
+/ ALternative Approach :- Here the approach is to find the subarray of size (n-k) with the minimum sum( using sliding window), and then subtract that subarray sum from 
+the total sum, and return remaining sum
+/
 
 import java.util.*;
 class Donuts {
