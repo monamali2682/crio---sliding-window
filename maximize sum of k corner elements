@@ -1,0 +1,69 @@
+Problem Description
+You are given N packets of Donuts, each packet containing a varying number of donuts. You have to pick total B packets 
+from either left or right end to get the maximum number of donuts.
+
+/* https://www.geeksforgeeks.org/maximize-sum-of-k-elements-in-array-by-taking-only-corner-elements/
+
+refer above link for explaination
+initially make left window of size k from beginning of array, then decrease left window by 1 unit and increase right window by 1 unit,
+do this till right window gets size k anf left window has size 0, for all these combinations maintain maxSum
+*/
+
+import java.util.*;
+class Donuts {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int B = sc.nextInt();
+        List<Integer> A = new ArrayList<Integer>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        long result = donuts(N, B, A);
+        System.out.println(result);
+        sc.close();
+    }
+
+    static long donuts(int N, int B, List<Integer>arr){
+        // MAking left window of complete Size B
+        long sum=0;
+        for(int i=0;i<B;i++){
+            sum+=arr.get(i);
+        }
+        long maxSum=sum;
+        // So current sliding window pointer are as below
+        int left=B-1;
+        int right = N-1;
+        while(left>=0){
+            sum+=arr.get(right);
+            sum-=arr.get(left);
+            left--;
+            right--;
+            maxSum=Math.max(sum,maxSum);
+        }
+        return maxSum;
+
+        // recursive fails
+        // int left=0;
+        // int right=N-1;
+        // long ans= helper(A,B,left,right);
+        //return ans;
+    }
+
+    // recursive approach takes 2^n ,hence fails
+    //  static long helper(List<Integer> arr,int packets,int left,int right){
+    //      if(packets==0){
+    //          return 0;
+    //      }
+    //      else if(left==right){
+    //          return arr.get(left);
+    //      }
+    //      else if(left>right){
+    //          return 0;
+    //     } 
+    //     long leftans= arr.get(left) + helper(arr,packets-1,left+1,right);
+    //     long rightans = arr.get(right) + helper(arr,packets-1,left,right-1) ;
+    //     return Math.max(leftans,rightans);   
+    //  }
+
+}
