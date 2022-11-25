@@ -35,8 +35,8 @@ class Donuts {
         }
         long maxSum=sum;
         // So current sliding window pointer are as below
-        int left=B-1;
-        int right = N-1;
+        int left=B-1; // end of left window 
+        int right = N-1;  // start of right window
         while(left>=0){
             sum+=arr.get(right);
             sum-=arr.get(left);
